@@ -1,0 +1,20 @@
+{
+  "name": "PET PEMPER",
+  "short_name": "Admin Panel",
+  "icons": [
+    {
+      "src": "/assets/img/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "theme_color": "#563d7c",
+  "background_color": "#563d7c",
+  "display": "standalone"
+}

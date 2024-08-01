@@ -1,0 +1,48 @@
+/**
+ * = Accordions
+ */
+
+ .accordion-item {
+    color: var(--bs-accordion-color);
+    background-color: rgb(38,43,64);
+    // border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color);
+}
+
+ .accordion-button {
+    text-align: left;
+    background-color: rgb(38,43,64);
+    margin-top: -10px;
+
+    .btn-check:focus + .btn, .btn:focus {
+        outline: 0;
+        box-shadow: none;
+    }
+
+    &:hover{
+        background-color: $gray-200;
+    }
+    
+}
+
+// Flush accordion items
+//
+// Remove borders and border-radius to keep accordion items edge-to-edge.
+
+.accordion-flush {
+    .accordion-button {
+        background-color: transparent;
+        &:not(.collapsed) {
+            color: $secondary;
+        }
+        &:focus {
+            border-color: $gray-300;
+            box-shadow: none;
+        }
+    }
+    .accordion-collapse {
+        border: 0;
+    }
+    
+}
+
+
