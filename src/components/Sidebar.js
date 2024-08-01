@@ -281,21 +281,21 @@ export default (props = {}) => {
                 link={Routes.Payment.path}
               />
               <NavItem
-                title="Categorys"
+                title="Categories"
                 icon={faShoppingCart}
                 link={Routes.Categorys.path}
               />
               <NavItem
-                title="Kyc"
+                title="KYC"
                 icon={faIdCard}
                 link={Routes.Kyc.path}
               />
-          <NavItem
+          {/*<NavItem
   title="SubscriptionPlan"
   icon={faCreditCard}
   link={Routes.SubscriptionPlan.path}
 />
-              {/* <NavItem
+               <NavItem
                 title="Bulk Upload"
                 icon={faUpload}
                 link={Routes.CommanForm.path}

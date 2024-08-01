@@ -69,51 +69,45 @@ export const Vendor = () => {
   useEffect(() => {
     getUserList();
   }, []);
-  // const handleToggleActive = async (event, user) => {
-  //   try {
-  //     const token1 = localStorage.getItem("token1");
-  //     const accessToken = localStorage.getItem("accessToken");
-
-  //     const updatedData = { isActive: event.target.checked }; // Prepare updated data
-
-  //     const res = await axios.put(
-  //       `https://pets.dev.savaapi.com/api/schema/dev1/mongodb/pets/users/update-by-id/${user._id}`,
-  //       updatedData,
-  //       {
-  //         headers: {
-  //           "x-am-authorization": token1,
-  //           "x-am-user-authorization": accessToken
-  //         }
-  //       }
-  //     );
-
-  //     console.log(res.data);
-  //     // If API call is successful, update the user's active status in the datatable
-  //     if (res.status === 200) {
-  //       const updatedUser = { ...user, isActive: event.target.checked };
-  //       setDatatable(prevState => ({
-  //         ...prevState,
-  //         rows: prevState.rows.map(row =>
-  //           row.uName === user.uName ? updatedUser : row
-  //         )
-  //       }));
-  //       Swal.fire({
-  //         position: "center",
-  //         icon: "success",
-  //         title: "User status updated successfully",
-  //         showConfirmButton: false,
-  //         timer: 1500
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.error(error.response);
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Oops...",
-  //       text: "Something went wrong!"
-  //     });
-  //   }
-  // };
+  const handleToggleActive = async (event, user) => {
+    try {
+      const token1 = localStorage.getItem("token1");
+      const accessToken = localStorage.getItem("accessToken");
+  
+      const updatedData = { active: event.target.checked }; // Prepare updated data
+  
+      const res = await axios.put(
+        `https://pets.dev.savaapi.com/api/schema/dev1/mongodb/pets/users/update-by-id/${user._id}`,
+        updatedData,
+        {
+          headers: {
+            "x-am-authorization": token1,
+            "x-am-user-authorization": accessToken
+          }
+        }
+      );
+  
+      // If API call is successful, update the user's active status in the datatable
+      if (res.status === 200) {
+        getUserList(); // Refresh the user list to reflect the changes
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "User status updated successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    } catch (error) {
+      console.error("Error updating user status:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Failed to update user status!"
+      });
+    }
+  };
+  
 
 
   const updateUser = async (id, updatedData) => {
@@ -183,15 +177,13 @@ export const Vendor = () => {
               <div className="switch">
                 <input
                   type="checkbox"
-                  // checked={item.isActive}
-                  checked={item.active} 
-                  // onChange={(event) => handleToggleActive(event, item)}
+                  checked={item.active} // This determines if the switch is on or off
+                  onChange={(event) => handleToggleActive(event, item)} // Call the function when toggled
                 />
                 <span className="slider"></span>
               </div>
             </label>
           ),
-
           actions: (
             <div>
               <FontAwesomeIcon
@@ -207,7 +199,7 @@ export const Vendor = () => {
           ),
         };
       });
-
+  
       setDatatable((prevState) => ({
         ...prevState,
         rows: data,
@@ -217,6 +209,7 @@ export const Vendor = () => {
       console.error(error);
     }
   };
+  
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
